@@ -12,6 +12,13 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower = 6.5f;
     private bool grounded;
 
+    private int money;
+
+    private void Awake()
+    {
+        money = 5;
+    }
+
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
@@ -43,4 +50,8 @@ public class PlayerController : MonoBehaviour {
         transform.Translate(mov * speed * Time.deltaTime);
     }
 
+    public void setCoin(int c)
+    {
+        money += c;
+    }
 }
