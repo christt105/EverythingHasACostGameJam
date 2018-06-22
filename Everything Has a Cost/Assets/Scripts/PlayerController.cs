@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
 
     private bool jump;
+    public float jumpPower = 6.5f;
     private bool grounded;
 
     // Use this for initialization
@@ -20,16 +21,19 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         float h;
         float v = 0;
-        h = Input.GetAxisRaw("Horizontal");
+        h = Input.GetAxis("Horizontal");
         //v = Input.GetAxis("Vertical");
 
-        //rb2D.IsTouching()
 
-        if (Input.GetButton("Jump"))
-            v = 2;
-        if (v != 0)
-            print(v);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+            jump = true;
+
+        if (jump)
+        {
+            rb2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            jump = false;
+        }
         mov.Set(h, v);
 
     }
@@ -38,4 +42,5 @@ public class PlayerController : MonoBehaviour {
     {
         transform.Translate(mov * speed * Time.deltaTime);
     }
+
 }
