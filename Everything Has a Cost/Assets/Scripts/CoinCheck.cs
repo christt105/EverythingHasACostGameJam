@@ -11,7 +11,8 @@ public class CoinCheck : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             playerS.setCoin(1);
-            this.gameObject.SetActive(false);
+            playerS.setMoneyText();
+            gameObject.SetActive(false);
         }
 
     }

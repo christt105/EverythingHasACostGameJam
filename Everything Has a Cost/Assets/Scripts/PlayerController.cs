@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower = 6.5f;
     private bool grounded;
 
+    public Text moneyText;
     private int money;
 
     private void Awake()
@@ -22,7 +24,10 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
-	}
+
+        setMoneyText();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -53,5 +58,10 @@ public class PlayerController : MonoBehaviour {
     public void setCoin(int c)
     {
         money += c;
+    }
+
+    public void setMoneyText()
+    {
+        moneyText.text = "Money: " + money.ToString();
     }
 }
