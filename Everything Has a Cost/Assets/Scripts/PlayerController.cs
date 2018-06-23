@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 offsetstepstext;
     public Text moneyText;
     private int money;
+    private int steps;
 
     private void Awake()
     {
@@ -55,9 +56,12 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        transform.Translate(mov * speed * Time.deltaTime);
+        transform.Translate(mov * speed * Time.deltaTime);               
+    }
 
-        updateStepsText();
+    void LateUpdate()
+    {
+        updateStepsText(); //Updates value distance player-home and position up player
     }
 
     public void setCoin(int c)
@@ -73,5 +77,12 @@ public class PlayerController : MonoBehaviour {
     void updateStepsText()
     {
         stepsText.transform.position = transform.position - offsetstepstext;
+        updateSteps();
+        stepsText.text = "Steps: " + steps.ToString();
+    }
+
+    void updateSteps()
+    {
+        steps = (int)transform.position.x;
     }
 }
