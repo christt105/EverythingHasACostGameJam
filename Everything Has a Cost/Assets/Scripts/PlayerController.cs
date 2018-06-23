@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower = 6.5f;
     private bool grounded;
 
+    public Text stepsText;
+    private Vector3 offsetstepstext;
     public Text moneyText;
     private int money;
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 
         setMoneyText();
 
+        offsetstepstext = transform.position - stepsText.transform.position;
     }
 	
 	// Update is called once per frame
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         transform.Translate(mov * speed * Time.deltaTime);
+
+        updateStepsText();
     }
 
     public void setCoin(int c)
@@ -63,5 +68,10 @@ public class PlayerController : MonoBehaviour {
     public void setMoneyText()
     {
         moneyText.text = "Money: " + money.ToString();
+    }
+
+    void updateStepsText()
+    {
+        stepsText.transform.position = transform.position - offsetstepstext;
     }
 }
