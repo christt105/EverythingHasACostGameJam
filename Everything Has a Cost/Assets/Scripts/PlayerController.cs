@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 
     private bool jump;
     public float jumpPower = 6.5f;
-    private bool grounded;
+    public bool grounded;
 
     public Text stepsText;
     private Vector3 offsetstepstext;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
 
         setMoneyText();
-
+        
         offsetstepstext = transform.position - stepsText.transform.position;
     }
 	
@@ -39,10 +39,8 @@ public class PlayerController : MonoBehaviour {
         float v = 0;
         h = Input.GetAxis("Horizontal");
         //v = Input.GetAxis("Vertical");
-
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
+                
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
             jump = true;
 
         if (jump)
@@ -56,12 +54,13 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        transform.Translate(mov * speed * Time.deltaTime);               
+        transform.Translate(mov * speed * Time.deltaTime);
+        updateStepsText(); //Updates value distance player-home and position up player
     }
 
     void LateUpdate()
     {
-        updateStepsText(); //Updates value distance player-home and position up player
+       
     }
 
     public void setCoin(int c)

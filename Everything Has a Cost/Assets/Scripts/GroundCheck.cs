@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private PlayerController player;
 
+    void Start () {
+        player = GetComponentInParent<PlayerController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
 
-	}
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            player.grounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            player.grounded = false;
+    }
+
 }
