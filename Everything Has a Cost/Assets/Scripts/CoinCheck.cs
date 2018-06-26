@@ -16,4 +16,9 @@ public class CoinCheck : MonoBehaviour {
         }
 
     }
+
+    public void reactive()
+    {
+        gameObject.SetActive(true);          
+    }
 }

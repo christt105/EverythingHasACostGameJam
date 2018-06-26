@@ -9,13 +9,15 @@ public class PlayerController : MonoBehaviour {
     private Vector2 mov;
     public float speed;
 
-    private bool jump;
+    public CameraControl cam;
+
     public float jumpPower = 6.5f;
     public bool grounded;
 
     public Text stepsText;
     private Vector3 offsetstepstext;
     public Text moneyText;
+    public Text stepsToHome;
     private int money;
     private int steps;
 
@@ -39,14 +41,10 @@ public class PlayerController : MonoBehaviour {
         float v = 0;
         h = Input.GetAxis("Horizontal");
         //v = Input.GetAxis("Vertical");
-                
-        if (Input.GetKeyDown(KeyCode.Space) && grounded)
-            jump = true;
-
-        if (jump)
+               
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             rb2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            jump = false;
         }
         mov.Set(h, v);
                 
@@ -56,6 +54,17 @@ public class PlayerController : MonoBehaviour {
     {
         transform.Translate(mov * speed * Time.deltaTime);
         updateStepsText(); //Updates value distance player-home and position up player
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            transform.position = new Vector2(-8, -1.46f);
+            money /= 2;
+            cam.changeEnvironment();
+        }
+        
     }
 
     public void setCoin(int c)

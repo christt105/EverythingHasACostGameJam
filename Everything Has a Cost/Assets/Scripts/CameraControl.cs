@@ -5,13 +5,17 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 
     private Vector3 offset;
+    private Camera cam;
     public PlayerController player;
     private bool outside;
+
+    public CoinCheck coin;
 
 	// Use this for initialization
 	void Start () {
         offset = transform.position - player.transform.position;
         outside = true;
+        cam = GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame
@@ -37,6 +41,8 @@ public class CameraControl : MonoBehaviour {
         else
         {
             outside = true;
+            //Reactive coins
+            coin.reactive();
             transform.position = new Vector3(3.08f, 0.05f, -10);
         }
     }
