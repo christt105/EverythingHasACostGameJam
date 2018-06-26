@@ -49,10 +49,7 @@ public class PlayerController : MonoBehaviour {
             jump = false;
         }
         mov.Set(h, v);
-
-        if (mov.x < 0)
-            transform.localScale.Set(-1, 1, 1);
-
+                
     }
 
     void FixedUpdate()
