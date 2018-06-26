@@ -7,7 +7,13 @@ public class Warp : MonoBehaviour {
     public GameObject Target;
     public CameraControl cam;
 
-	void OnTriggerEnter2D(Collider2D other)
+    private void Awake()
+    {
+        GetComponent<Renderer>().enabled = false;
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
