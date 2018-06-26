@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Awake()
     {
-        money = 5;
+        money = 1;
     }
 
     // Use this for initialization
@@ -50,17 +50,15 @@ public class PlayerController : MonoBehaviour {
         }
         mov.Set(h, v);
 
+        if (mov.x < 0)
+            transform.localScale.Set(-1, 1, 1);
+
     }
 
     void FixedUpdate()
     {
         transform.Translate(mov * speed * Time.deltaTime);
         updateStepsText(); //Updates value distance player-home and position up player
-    }
-
-    void LateUpdate()
-    {
-       
     }
 
     public void setCoin(int c)
